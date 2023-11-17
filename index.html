@@ -34,6 +34,38 @@
 
     <div id="bookmarkletContainer"></div>
 
+    <style>
+        .bookmarklet {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .bookmarklet:hover {
+            background-color: #45a049;
+        }
+
+        .bookmarklet.default {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .bookmarklet.primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .bookmarklet.secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+    </style>
+
     <script>
         function generateEmbedCode() {
             // Get the name and code from the inputs
@@ -41,7 +73,7 @@
             var code = document.getElementById('codeInput').value;
 
             // Generate HTML embed code
-            var embedCode = `<a href="javascript:(${code})();" class="bookmarklet" title="${bookmarkletName}">Click me</a>`;
+            var embedCode = `<a href="javascript:(${code})();" class="bookmarklet ${getButtonStyle()}">${bookmarkletName}</a>`;
 
             // Display the embed code in the textarea
             document.getElementById('embedCode').value = embedCode;
@@ -51,7 +83,7 @@
         }
 
         function applyButtonStyle() {
-            var buttonStyle = document.getElementById('buttonStyle').value;
+            var buttonStyle = getButtonStyle();
             var bookmarklet = document.getElementById('bookmarkletContainer').querySelector('.bookmarklet');
 
             // Remove existing styles
@@ -59,6 +91,10 @@
 
             // Apply selected style
             bookmarklet.classList.add(buttonStyle);
+        }
+
+        function getButtonStyle() {
+            return document.getElementById('buttonStyle').value;
         }
 
         function copyToClipboard() {
