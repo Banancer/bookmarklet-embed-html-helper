@@ -23,6 +23,15 @@
 
     <button onclick="copyToClipboard()">Copy Embed Code</button>
 
+    <div id="buttonOptions">
+        <label for="buttonStyle">Button Style:</label>
+        <select id="buttonStyle" onchange="applyButtonStyle()">
+            <option value="default">Default</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+        </select>
+    </div>
+
     <div id="bookmarkletContainer"></div>
 
     <script>
@@ -32,13 +41,24 @@
             var code = document.getElementById('codeInput').value;
 
             // Generate HTML embed code
-            var embedCode = `<a href="javascript:(${code})();" id="${bookmarkletName}">${bookmarkletName}</a>`;
+            var embedCode = `<a href="javascript:(${code})();" class="bookmarklet" title="${bookmarkletName}">Click me</a>`;
 
             // Display the embed code in the textarea
             document.getElementById('embedCode').value = embedCode;
 
             // Append the bookmarklet to the container
             document.getElementById('bookmarkletContainer').innerHTML = embedCode;
+        }
+
+        function applyButtonStyle() {
+            var buttonStyle = document.getElementById('buttonStyle').value;
+            var bookmarklet = document.getElementById('bookmarkletContainer').querySelector('.bookmarklet');
+
+            // Remove existing styles
+            bookmarklet.classList.remove('default', 'primary', 'secondary');
+
+            // Apply selected style
+            bookmarklet.classList.add(buttonStyle);
         }
 
         function copyToClipboard() {
