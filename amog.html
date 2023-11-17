@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Embed Code Generator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+    <h1>HTML Embed Code Generator</h1>
+
+    <label for="bookmarkletName">Bookmarklet Name:</label>
+    <input type="text" id="bookmarkletName" placeholder="Bookmarklet Name">
+
+    <label for="codeInput">Enter JavaScript Code:</label>
+    <input type="text" id="codeInput" placeholder="e.g., alert('Hello, World!')">
+
+    <button onclick="generateEmbedCode()">Generate Embed Code</button>
+
+    <label for="embedCode">Generated HTML Embed Code:</label>
+    <textarea id="embedCode" rows="5" readonly></textarea>
+
+    <button onclick="copyToClipboard()">Copy Embed Code</button>
+
+    <div id="bookmarkletContainer"></div>
+
+    <script>
+        function generateEmbedCode() {
+            // Get the name and code from the inputs
+            var bookmarkletName = document.getElementById('bookmarkletName').value;
+            var code = document.getElementById('codeInput').value;
+
+            // Generate HTML embed code
+            var embedCode = `<a href="javascript:(${code})();" id="${bookmarkletName}">Click me</a>`;
+
+            // Display the embed code in the textarea
+            document.getElementById('embedCode').value = embedCode;
+
+            // Append the bookmarklet to the container
+            document.getElementById('bookmarkletContainer').innerHTML = embedCode;
+        }
+
+        function copyToClipboard() {
+            // Select the textarea content
+            var textarea = document.getElementById('embedCode');
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the selected text to the clipboard
+            document.execCommand('copy');
+
+            // Alert the user that the text has been copied
+            alert('Embed code copied to clipboard!');
+        }
+    </script>
+
+</body>
+</html>
