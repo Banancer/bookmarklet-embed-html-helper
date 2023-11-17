@@ -32,7 +32,7 @@
             var code = document.getElementById('codeInput').value;
 
             // Generate HTML embed code
-            var embedCode = `<a href="javascript:(${code})();" id="${bookmarkletName}">Click me</a>`;
+            var embedCode = `<a href="javascript:(${code})();" id="${bookmarkletName}">${bookmarkletName}</a>`;
 
             // Display the embed code in the textarea
             document.getElementById('embedCode').value = embedCode;
